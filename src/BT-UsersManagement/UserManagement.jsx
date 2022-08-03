@@ -9,6 +9,7 @@ export default class UserManagement extends Component {
   
     this.state = {
       userDataInf : [],
+      selectedUser: null,
     }
   }
   fetchUser = async () => {
@@ -19,6 +20,17 @@ export default class UserManagement extends Component {
       console.log("error");
     }
   } 
+
+  fetchUserDetail = async (userID) => {
+  try {
+    const {data} = await axios.get(`https://62b6eabe6999cce2e80a17ba.mockapi.io/api/users/${userID}`)
+
+    this.setState({selectedUser: data})
+  }catch{
+    console.log("error");
+  }
+}
+
   componentDidMount() {
     this.fetchUser()
   }
@@ -34,10 +46,10 @@ export default class UserManagement extends Component {
             <strong>User Form</strong>
           </div>
           <div className="card-body">
-            <UserForm onSuccess={this.fetchUser}/>
+            <UserForm onSuccess={this.fetchUser} showUserUpdate = {this.state.selectedUser}/>
           </div>
         </label>
-        <UserList  showListUserAPI = {this.state.userDataInf}  onDeleteSuccess ={this.fetchUser} />
+        <UserList  showListUserAPI = {this.state.userDataInf}  onDeleteSuccess ={this.fetchUser} onSelectSuccess={this.fetchUserDetail} />
       </div>
       </div>
     )

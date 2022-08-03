@@ -17,12 +17,9 @@ export default class UserList extends Component {
 
   render() {
     const {showListUserAPI} = this.props
-
-
-
     return (
-      <div className='border border-4 border-warning mt-5 table-responsive-'>
-        <table className='table table-dark table-striped '>
+      <div className='border border-4 border-warning mt-5 table-responsive h-100'>
+        <table className='table table-dark table-striped'>
           <thead className='table-secondary border-bottom border-4 border-warning'>
             <tr>
             <th scope='col'>STT</th>
@@ -47,8 +44,8 @@ export default class UserList extends Component {
             <td>{eachObject.email}</td>
             <td>{eachObject.phone}</td>
             <td>{eachObject.type}</td>
-            <td colspan="2">
-              <button className='btn btn-success me-2' > Edit </button>
+            <td>
+              <button className='btn btn-success me-2' onClick={()=> this.props.onSelectSuccess(eachObject.id)}> Edit </button>
               <button className='btn btn-danger' onClick={()=> this.handleDelete(eachObject.id)}> Delete </button>
             </td>
                 </tr>
